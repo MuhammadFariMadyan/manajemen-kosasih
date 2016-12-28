@@ -13,7 +13,8 @@
 <h2 class="panel-title">Detail tugas {{ $tugas->judul }} |  deadline : {{ $tugas->deadline }} | status tugas : @if($tugas->status_tugas == 0) Belum dikerjakan @elseif($tugas->status_tugas == 1) Sedang Dikerjakan  @elseif($tugas->status_tugas == 2) Sudah Selesai Oleh Petugas @elseif($tugas->status_tugas == 3) Sudah Dikonfirmasi Oleh Pengecks @endif  </h2>
 </div>
 <div class="panel-body">
-<p>{{ $tugas->deskripsi }}</p>
+<p> Deskripsi : {{ $tugas->deskripsi }}</p>
+<p>Masalah yang belum di atasi: {{ $tugas->masalah }} </p>
 
 
 @if (isset($tugas) && $tugas->foto)
@@ -28,19 +29,32 @@
 @endif
 </div>
 </div>
-<!-- panel komentar -->
+<!-- panel form komentar -->
 <div class="panel panel-default">
 <div class="panel-heading">
 <h2 class="panel-title">Komentar</h2>
 </div>
 <div class="panel-body">
-{!! Form::open(['url' => route('tugas.store'),
+{!! Form::open(['url' => route('tugas.komentar'),
 'method' => 'post', 'class'=>'form-horizontal']) !!}
 @include('tugas._form_komentar')
 {!! Form::close() !!}
 </div>
 </div>
-<!--/ panel komentar -->
+<!--/ panel form komentar -->
+<!-- panel  komentar -->
+@foreach($komentar as $komentars)
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 class="panel-title">{{ $komentars->user->name}}  | {{ $komentars->created_at}}</h2>
+</div>
+<div class="panel-body">
+{{ $komentars->isi_komentar}}
+</div>
+</div>
+
+@endforeach
+<!-- panel  komentar -->
 
 </div>
 </div>

@@ -16,6 +16,7 @@ use App\Kategori;
 use App\Tugas;
 use App\User;
 use File;
+use App\KomentarController;
 class TugasController extends Controller
 {
     /**
@@ -39,7 +40,10 @@ class TugasController extends Controller
             [
              'detail_url' => route('tugas.show', $tugas->id),
             'edit_url' => route('tugas.edit', $tugas->id),
-        
+             'kerjakan_url' => route('tugas.dikerjakan',$tugas->id),
+             'konfirmasi_url' => route('tugas.konfirmasi',$tugas->id),
+             'selesai_url' => route('tugas.selesai',$tugas->id),
+             'belum_url' => route('tugas.belum',$tugas->id),
             'hapus_url' => route('tugas.destroy',$tugas->id),
             'model' => $tugas,
             'id_user' => $id_user,
@@ -135,7 +139,9 @@ return view('tugas.index')->with(compact('html'));
 
         $tugas = Tugas::find($id);
 
-        return view('tugas.detail',['tugas' => $tugas ]);
+        $komentar = KomentarController::with('user')->where('tugas_id',$id)->orderBy('created_at','desc')->get();
+
+        return view('tugas.detail',['tugas' => $tugas ,'komentar' => $komentar]);
     }
 
     /**
@@ -246,7 +252,115 @@ $tugas = Tugas::find($id);
      public function komentar(Request $request)
     {
 
+            $this->validate($request, [
+        'isi_komentar' => 'required',
+        'tugas_id' => 'required',
+     
+        ]);
+
+    $id_user = Auth::user()->id;
+    KomentarController::create(['isi_komentar' => $request->isi_komentar,'tugas_id' => $request->tugas_id,'user_id' => $id_user]);
+
+                  Session::flash("flash_notification", [
+    "level"=>"success",
+    "message"=>"Berhasil mengirim Komentar "
+    ]);
+
+         return redirect('/tracking/tugas/'.$request->tugas_id);
+
+
     }
+    public function sedang_dikerjakan($id)
+    {
+        # code...
+
+        $tugas = Tugas::find($id);
+
+        $tugas->update(['status_tugas' => 1,'tanggal_dikerjakan' => date('Y-m-d')]);
+            Session::flash("flash_notification", [
+    "level"=>"success",
+    "message"=>"Berhasil mengubah status Tugas menjadi sedang di kerjakan "
+    ]);
+
+ return redirect('/tracking/tugas');
+
+
+        
+    }
+
+     public function selesai_dikerjakan($id)
+    {
+        # code...
+
+        $tugas = Tugas::find($id);
+        $tugas->update(['status_tugas' => 2,'tanggal_sudah_selesai' => date('Y-m-d')]);
+            Session::flash("flash_notification", [
+    "level"=>"success",
+    "message"=>"Berhasil mengubah status Tugas menjadi selesai di kerjakan "
+    ]);
+
+ return redirect('/tracking/tugas');
+
+
+        
+    }
+
+     public function konfirmasi_kerjaan($id)
+    {
+        # code...
+
+        $tugas = Tugas::find($id);
+        $tugas->update(['status_tugas' => 3,'tanggal_dikonfirmasi' => date('Y-m-d')]);
+            Session::flash("flash_notification", [
+    "level"=>"success",
+    "message"=>"Berhasil mengubah status Tugas menjadi Terkonfirmasi "
+    ]);
+
+ return redirect('/tracking/tugas');
+
+
+        
+    }
+
+      public function belum_selesai($id)
+    {
+        # code...
+
+        $tugas = Tugas::find($id);
+       
+
+ return view('tugas.belum',['tugas' => $tugas]);
+
+
+        
+    }
+
+     public function belum_selesai_update(Request $request ,$id)
+    {
+        # code...
+
+            $this->validate($request, [
+        'masalah' => 'required'
+        ]);
+
+    $id_user = Auth::user()->id;
+        $tugas = Tugas::find($id);
+
+        $tugas->update(['masalah'=> $request->masalah,'status_tugas' => 0]);
+
+                Session::flash("flash_notification", [
+    "level"=>"success",
+    "message"=>"Berhasil mengubah status tugas menjadi belum selesai "
+    ]);
+
+
+
+ return redirect('/tracking/tugas');
+
+
+        
+    }
+
 
 
 }
