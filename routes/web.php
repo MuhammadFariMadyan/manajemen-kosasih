@@ -23,4 +23,11 @@ Route::group(['prefix'=>'tracking', 'middleware'=>['auth']], function () {
 
 	Route::resource('kategori', 'KategoriController');
 
+	Route::resource('tugas', 'TugasController');
+	Route::get('/komentar',[
+'middleware' => ['auth'],
+'as' => 'tugas.komentar',
+'uses' => 'TugasController@komentar'
+] );
+
 });

@@ -51,6 +51,7 @@
                     <ul class="nav navbar-nav">
                        @if (Auth::check())
                     <li><a href="{{ url('/home') }}">Dashboard</a></li>
+                     <li><a href="{{route('tugas.index')}}">Tugas</a></li>
                     <li><a href="{{ route('kategori.index') }}">Kategori</a></li>
                     @endif
 
