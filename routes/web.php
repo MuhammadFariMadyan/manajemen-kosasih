@@ -18,3 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::group(['prefix'=>'tracking', 'middleware'=>['auth']], function () {
+
+	Route::resource('kategori', 'KategoriController');
+
+});

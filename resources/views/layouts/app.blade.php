@@ -49,7 +49,11 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                       @if (Auth::check())
+                    <li><a href="{{ url('/home') }}">Dashboard</a></li>
+                    <li><a href="{{ route('kategori.index') }}">Kategori</a></li>
+                    @endif
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -83,6 +87,7 @@
                 </div>
             </div>
         </nav>
+        @include('layouts._flash')
 
         @yield('content')
     </div>
