@@ -21,6 +21,7 @@ class CreateTugasTable extends Migration
             $table->string('deskripsi');
             $table->integer('kategori_id');
             $table->string('foto')->nullable();
+            $table->string('foto_masalah')->nullable();
             $table->date('deadline')->nullable();
             $table->integer('status_tugas')->default(0);
             $table->string('masalah')->nullable();

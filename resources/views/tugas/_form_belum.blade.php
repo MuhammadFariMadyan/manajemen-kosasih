@@ -6,6 +6,14 @@
 </div>
 </div>
 
+<div class="form-group{{ $errors->has('foto_masalah') ? ' has-error' : '' }}">
+{!! Form::label('foto_masalah', 'Foto masalah Tugas', ['class'=>'col-md-2 control-label']) !!}
+<div class="col-md-4">
+{!! Form::file('foto_masalah') !!}
+{!! $errors->first('foto_masalah', '<p class="help-block">:message</p>') !!}
+</div>
+</div>
+
 
 {!! Form::hidden('tugas_id', $value  = $tugas->id, ['class'=>'form-control']) !!}
 

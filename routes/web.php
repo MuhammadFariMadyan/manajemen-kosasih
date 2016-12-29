@@ -19,6 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+
+Route::get('/telegram', 'HomeController@telegram');
+
 Route::group(['prefix'=>'tracking', 'middleware'=>['auth']], function () {
 
 	Route::resource('kategori', 'KategoriController');
