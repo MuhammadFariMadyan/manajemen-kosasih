@@ -472,6 +472,7 @@ $tugas = Tugas::find($id);
 
         ]);
         $tugas = Tugas::find($id);
+        $tugas->update(['status_tugas' => 2,'tanggal_sudah_selesai' => date('Y-m-d'),'deskripsi_selesai' => $request->deskripsi_selesai]);
             Session::flash("flash_notification", [
     "level"=>"success",
     "message"=>"Berhasil mengubah status Tugas menjadi selesai di kerjakan "
@@ -482,6 +483,7 @@ $tugas = Tugas::find($id);
 
     $response = Telegram::sendMessage([
       'chat_id' =>    $chat_id, 
+      'text' => "$nama_user selesai mengerjakan tugas $tugas->judul \n Penjelesan Selesainya : $request->deskripsi_selesai  "
     ]);
 
      if ($request->hasFile('foto_selesai')) {
