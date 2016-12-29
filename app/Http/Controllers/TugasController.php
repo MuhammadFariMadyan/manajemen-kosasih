@@ -340,21 +340,11 @@ $tugas = Tugas::find($id);
     {
         # code...
 
-        $tugas = Tugas::find($id);
-        $tugas->update(['status_tugas' => 2,'tanggal_sudah_selesai' => date('Y-m-d')]);
-            Session::flash("flash_notification", [
-    "level"=>"success",
-    "message"=>"Berhasil mengubah status Tugas menjadi selesai di kerjakan "
-    ]);
-   $chat_id = -174389666;
-            $nama_user = Auth::user()->name;
+          $tugas = Tugas::find($id);
+       
 
-          $response = Telegram::sendMessage([
-      'chat_id' =>    $chat_id, 
-      'text' => "$nama_user selesai mengerjakan tugas $tugas->judul  "
-    ]);
+ return view('tugas.selesai',['tugas' => $tugas]);
 
- return redirect('/tracking/tugas');
 
 
         
@@ -405,7 +395,9 @@ $tugas = Tugas::find($id);
         # code...
 
             $this->validate($request, [
-        'masalah' => 'required'
+        'masalah' => 'required',
+        'foto_masalah' => 'image'
+
         ]);
 
     $id_user = Auth::user()->id;
@@ -470,6 +462,66 @@ $tugas = Tugas::find($id);
 
 
         
+    }
+
+    public function selesai_update(Request $request ,$id){
+
+  $this->validate($request, [
+        'deskripsi_selesai' => 'required',
+        'foto_selesai' => 'image'
+
+        ]);
+        $tugas = Tugas::find($id);
+            Session::flash("flash_notification", [
+    "level"=>"success",
+    "message"=>"Berhasil mengubah status Tugas menjadi selesai di kerjakan "
+    ]);
+
+          $chat_id = -174389666;
+          $nama_user = Auth::user()->name;
+
+    $response = Telegram::sendMessage([
+      'chat_id' =>    $chat_id, 
+    ]);
+
+     if ($request->hasFile('foto_selesai')) {
+        // Mengambil file yang diupload
+        $uploaded_foto_selesai = $request->file('foto_selesai');
+        // mengambil extension file
+        $extension = $uploaded_foto_selesai->getClientOriginalExtension();
+        // membuat nama file random berikut extension
+        $filename = md5(time()) . '.' . $extension;
+        // menyimpan cover ke folder public/img
+        $destinationPath = public_path() . DIRECTORY_SEPARATOR . 'img';
+        $uploaded_foto_selesai->move($destinationPath, $filename);
+
+
+        // hapus cover lama, jika ada
+        if ($tugas->foto_selesai) {
+        $old_foto_selesai = $tugas->foto_selesai;
+        $filepath = public_path() . DIRECTORY_SEPARATOR . 'img'
+        . DIRECTORY_SEPARATOR . $tugas->foto_selesai;
+        try {
+        File::delete($filepath);
+        } catch (FileNotFoundException $e) {
+        // File sudah dihapus/tidak ada
+        }
+        }
+        // mengisi field cover di book dengan filename yang baru dibuat
+        $tugas->foto_selesai = $filename;
+        $tugas->save();
+
+
+         $lokasi_foto = $destinationPath."/".$filename;
+
+         $sendPhoto = Telegram::sendPhoto([
+          'chat_id' => $chat_id , 
+          'photo' => $lokasi_foto, 
+            'caption' =>  $tugas->judul
+        ]);
+     }
+
+ return redirect('/tracking/tugas');
     }
 
 

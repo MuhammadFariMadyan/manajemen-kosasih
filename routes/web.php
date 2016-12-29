@@ -60,4 +60,10 @@ Route::group(['prefix'=>'tracking', 'middleware'=>['auth']], function () {
 'uses' => 'TugasController@belum_selesai_update'
 ] );
 
+						Route::put('/sudah-selesai{id}',[
+'middleware' => ['auth'],
+'as' => 'tugas.selesai-update',
+'uses' => 'TugasController@selesai_update'
+] );
+
 });
