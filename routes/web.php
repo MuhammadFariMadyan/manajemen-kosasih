@@ -36,6 +36,15 @@ Route::group(['prefix'=>'tracking', 'middleware'=>['auth']], function () {
 'as' => 'tugas.dikerjakan',
 'uses' => 'TugasController@sedang_dikerjakan'
 ] );
+
+
+		Route::get('/status-tugas/{id}',[
+'middleware' => ['auth'],
+'as' => 'tugas.status',
+'uses' => 'TugasController@status_tugas'
+] );
+
+
 			Route::get('/selesai-dikerjakan/{id}',[
 'middleware' => ['auth'],
 'as' => 'tugas.selesai',

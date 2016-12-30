@@ -60,10 +60,10 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                           <a href="#">Tugas Belum Dikerjakan / Bermasalah</a>
-                                        <a href="#">Tugas Sedang Dikerjakan</a>
-                                        <a href="#">Tugas Sudah Selesai Dikerjakan</a>
-                                        <a href="#">Tugas Sudah Dikonfirmasi</a>
+                                           <a href="{{ url('/tracking/status-tugas/0') }}">Tugas Belum Dikerjakan / Bermasalah</a>
+                                        <a href="{{ url('/tracking/status-tugas/1') }}">Tugas Sedang Dikerjakan</a>
+                                        <a href="{{ url('/tracking/status-tugas/2') }}">Tugas Sudah Selesai Dikerjakan</a>
+                                        <a href="{{ url('/tracking/status-tugas/3') }}">Tugas Sudah Dikonfirmasi</a>
                                     </li>
                                 </ul>
                             </li>
