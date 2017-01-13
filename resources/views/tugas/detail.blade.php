@@ -15,18 +15,41 @@
 <div class="panel-body">
 <p> Deskripsi : {{ $tugas->deskripsi }}</p>
 <p>Masalah yang belum di atasi: {{ $tugas->masalah }} </p>
+@if (isset($tugas) && $tugas->foto_masalah)
+<p>
+<div class="col-md-2">
 
+Foto masalah Tugas: 
+</div>
+<div class="col-md-4">{!! Html::image(asset('img/'.$tugas->foto_masalah), null, ['class'=>'img-rounded img-responsive']) !!}</div>
+
+</p>
+@endif
 
 @if (isset($tugas) && $tugas->foto)
 <p>
 <div class="col-md-2">
-	
 
+Foto Tugas: 
 </div>
 <div class="col-md-4">{!! Html::image(asset('img/'.$tugas->foto), null, ['class'=>'img-rounded img-responsive']) !!}</div>
 
 </p>
 @endif
+
+
+@if (isset($tugas) && $tugas->foto_selesai)
+<p>
+<div class="col-md-2">
+	
+Foto Selesai : 
+</div>
+<div class="col-md-4">{!! Html::image(asset('img/'.$tugas->foto_selesai), null, ['class'=>'img-rounded img-responsive']) !!}</div>
+
+</p>
+@endif
+
+
 </div>
 </div>
 <!-- panel form komentar -->
