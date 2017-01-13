@@ -83,6 +83,21 @@ public function status_tugas(Request $request, Builder $htmlBuilder,$id)
             'model' => $tugas,
             'id_user' => $id_user,
             ]);
+            })->addColumn('status_tugasnya', function($tugas){
+        if($tugas->status_tugas == 0) {
+          $status_tugas = "Belum dikerjakan";
+        }
+        elseif($tugas->status_tugas == 1){
+   $status_tugas = "Sedang dikerjakan";
+        }
+         elseif($tugas->status_tugas == 2){
+   $status_tugas = "Sudah Selesai Oleh Petugas";
+        }
+         elseif($tugas->status_tugas == 3){
+   $status_tugas = "Sudah Dikonfirmasi Oleh Pengecek";
+        }
+
+        return $status_tugas;
             })->make(true);
     }
 $html = $htmlBuilder
@@ -90,6 +105,7 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'petugas.name', 'name'=>'petugas.name', 'title'=>'Petugas'])
 ->addColumn(['data' => 'menugaskan.name', 'name'=>'menugaskan.name', 'title'=>'Menugaskan'])
 ->addColumn(['data' => 'deadline', 'name'=>'deadline', 'title'=>'Deadline'])
+->addColumn(['data' => 'status_tugasnya', 'name'=>'status_tugasnya', 'title'=>'Status'])
 ->addColumn(['data' => 'created_at', 'name'=>'created_at', 'title'=>'Created At'])
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]);
 
