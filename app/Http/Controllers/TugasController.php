@@ -173,7 +173,7 @@ return view('tugas.index')->with(compact('html'));
 
         $petugas = User::find($request->petugas);
 
-         $chat_id = -174389666;
+         $chat_id = env('CHAT_ID','-174389666');
 
           $response = Telegram::sendMessage([
       'chat_id' =>    $chat_id, 
@@ -335,7 +335,7 @@ $tugas = Tugas::find($id);
     ]);
     $nama_user = Auth::user()->name;
     $petugas = User::find($tugas->petugas);
-     $chat_id = -174389666;
+     $chat_id = env('CHAT_ID','-174389666');
 
           $response = Telegram::sendMessage([
       'chat_id' =>    $chat_id, 
@@ -367,7 +367,7 @@ $tugas = Tugas::find($id);
     ]);
         $tugas = Tugas::find($request->tugas_id);
 
-          $chat_id = -174389666;
+          $chat_id = env('CHAT_ID','-174389666');
 
           $response = Telegram::sendMessage([
       'chat_id' =>    $chat_id, 
@@ -390,7 +390,7 @@ $tugas = Tugas::find($id);
     "message"=>"Berhasil mengubah status Tugas menjadi sedang di kerjakan "
     ]);
 
-        $chat_id = -174389666;
+        $chat_id = env('CHAT_ID','-174389666');
  $nama_user = Auth::user()->name;
 
           $response = Telegram::sendMessage([
@@ -430,7 +430,7 @@ $tugas = Tugas::find($id);
     "message"=>"Berhasil mengubah status Tugas menjadi Terkonfirmasi "
     ]);
 
-             $chat_id = -174389666;
+             $chat_id = env('CHAT_ID','-174389666');
             $nama_user = Auth::user()->name;
             $petugas = User::find($tugas->petugas);
 
@@ -472,7 +472,7 @@ $tugas = Tugas::find($id);
         $tugas = Tugas::find($id);
 
         $tugas->update(['masalah'=> $request->masalah,'status_tugas' => 0]);
-  $chat_id = -174389666;
+  $chat_id = env('CHAT_ID','-174389666');
          $nama_user = Auth::user()->name;
             $petugas = User::find($tugas->petugas);
 
@@ -546,7 +546,7 @@ $tugas = Tugas::find($id);
     "message"=>"Berhasil mengubah status Tugas menjadi selesai di kerjakan "
     ]);
 
-          $chat_id = -174389666;
+          $chat_id = env('CHAT_ID','-174389666');
           $nama_user = Auth::user()->name;
 
     $response = Telegram::sendMessage([

@@ -31,7 +31,7 @@ class HomeController extends Controller
     public function telegram(){
 
         $response = Telegram::getUpdates();
-        $chat_id = -174389666;
+      
         return $response;
     }
 }
