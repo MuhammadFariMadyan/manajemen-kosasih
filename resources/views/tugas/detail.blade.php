@@ -14,6 +14,7 @@
 </div>
 <div class="panel-body">
 <p> Deskripsi : {{ $tugas->deskripsi }}</p>
+<p> Penjelasan mengenai yang sudah di selesaikan : {{ $tugas->deskripsi_selesai }}</p>
 <p>Masalah yang belum di atasi: {{ $tugas->masalah }} </p>
 @if (isset($tugas) && $tugas->foto_masalah)
 <p>
