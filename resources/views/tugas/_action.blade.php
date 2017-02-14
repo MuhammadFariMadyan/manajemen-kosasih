@@ -7,10 +7,8 @@
 <a href="{{ $konfirmasi_url }}" class="btn btn-success  btn-xs ">Konfirmasi Pekerjaan</a>
 @endif
 <a href="{{ $detail_url }}">Detail</a>
-@if($model->menugaskan == $id_user)
-{!! Form::model($model, ['url' => $hapus_url, 'method' => 'delete', 'class' => 'form-inline'] 
-) !!}
-
+@if($model->menugaskan == $id_user) 
+{!! Form::model($model, ['url' => $hapus_url, 'method' => 'delete', 'class' => 'form-inline js-confirm', 'data-confirm' => $confirm_message]) !!}
 
 <a href="{{ $edit_url }}">Edit</a>
 {!! Form::submit('Hapus', ['class'=>'btn btn-xs btn-danger']) !!}

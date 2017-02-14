@@ -31,7 +31,7 @@ class TugasController extends Controller
     if ($request->ajax()) {
 
 
-      $tugas = Tugas::with(['kategori','petugas','menugaskan']);
+      $tugas = Tugas::with(['kategori','petugas','menugaskan'])->orderBy('created_at','desc');
 
 
             return Datatables::of($tugas)->addColumn('action', function($tugas){
@@ -45,6 +45,7 @@ class TugasController extends Controller
              'selesai_url' => route('tugas.selesai',$tugas->id),
              'belum_url' => route('tugas.belum',$tugas->id),
             'hapus_url' => route('tugas.destroy',$tugas->id),
+            'confirm_message' => 'Yakin Mau Mengapus Tugas ' . $tugas->judul . '?',
             'model' => $tugas,
             'id_user' => $id_user,
             ]);

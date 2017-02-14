@@ -10,7 +10,11 @@
 </ul>
 <div class="panel panel-default">
 <div class="panel-heading">
-<h2 class="panel-title">Detail tugas {{ $tugas->judul }} |  deadline : {{ $tugas->deadline }} | status tugas : @if($tugas->status_tugas == 0) Belum dikerjakan @elseif($tugas->status_tugas == 1) Sedang Dikerjakan  @elseif($tugas->status_tugas == 2) Sudah Selesai Oleh Petugas @elseif($tugas->status_tugas == 3) Sudah Dikonfirmasi Oleh Pengecek @endif  </h2>
+<h2 class="panel-title">Detail tugas {{ $tugas->judul }} |  deadline : {{ $tugas->deadline }} | status tugas : <b>@if($tugas->status_tugas == 0)     <a style="color: red;">Belum dikerjakan</a>
+@elseif($tugas->status_tugas == 1) <a style="color: orange;">Sedang Dikerjakan  </a>
+@elseif($tugas->status_tugas == 2) <a style="color: green;">Sudah Selesai Oleh Petugas </a>
+@elseif($tugas->status_tugas == 3) <a style="color: blue;">Sudah Dikonfirmasi Oleh Pengecek </a>
+@endif  </b> </h2>
 </div>
 <div class="panel-body">
 <p> Deskripsi : {{ $tugas->deskripsi }}</p>
