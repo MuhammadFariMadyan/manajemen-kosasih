@@ -26,6 +26,8 @@ Route::group(['prefix'=>'tracking', 'middleware'=>['auth']], function () {
 
 	Route::resource('lokasi', 'LokasiController');
 
+	Route::resource('otoritas', 'OtoritasController');
+
 	Route::resource('tugas', 'TugasController');
 
 	Route::post('/komentar',[
