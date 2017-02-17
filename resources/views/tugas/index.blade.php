@@ -64,6 +64,18 @@
 @endforeach
   </ul>
 </div> 
+
+<div class="btn-group">
+  <button type="button" class="btn btn-primary">Lokasi</button>
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">  
+  @foreach($lokasi as $lokasis)
+    <li><a href="{{ route('tugas.lokasi',$lokasis->id) }}">{{ $lokasis->lokasi }}</a></li>
+@endforeach
+  </ul>
+</div> 
 <div class="table-responsive">
 {!! $html->table(['class'=>'table-striped table']) !!}
 

@@ -38,6 +38,14 @@
 </div>
 </div>
 
+<div class="form-group {!! $errors->has('lokasi_id') ? 'has-error' : '' !!}">
+{!! Form::label('lokasi_id', 'Lokasi', ['class'=>'col-md-2 control-label']) !!}
+<div class="col-md-4">
+{!! Form::select('lokasi_id',$lokasi, null,  array('class' => 'form-control')) !!}
+
+{!! $errors->first('lokasi_id', '<p class="help-block">:message</p>') !!}
+</div>
+</div>
 <div class="form-group{{ $errors->has('foto') ? ' has-error' : '' }}">
 {!! Form::label('foto', 'Foto Tugas', ['class'=>'col-md-2 control-label']) !!}
 <div class="col-md-4">

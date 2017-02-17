@@ -23,9 +23,10 @@ class Tugas extends Model
 			'pengecek',
 			'tanggal_dikerjakan',
 			'tanggal_sudah_selesai',
-			'tanggal_dikonfirmasi'];
+			'tanggal_dikonfirmasi',
+			'lokasi_id'];
 
-			   public function kategori()
+	public function kategori()
     {
     return $this->belongsTo('App\Kategori','kategori_id');
     }
@@ -34,9 +35,17 @@ class Tugas extends Model
     {
     return $this->belongsTo('App\User','petugas');
     }
+
     public function menugaskan()
     {
+
     return $this->belongsTo('App\User','menugaskan');
     }
+
+	public function lokasi()
+    {
+    return $this->belongsTo('App\Lokasi','lokasi_id');
+    }
+
     
 }

@@ -31,7 +31,7 @@ class CreateTugasTable extends Migration
             $table->date('tanggal_dikerjakan')->nullable();
             $table->date('tanggal_sudah_selesai')->nullable();
             $table->date('tanggal_dikonfirmasi')->nullable();
-            
+            $table->integer('lokasi_id');            
             $table->timestamps();
         });
     }

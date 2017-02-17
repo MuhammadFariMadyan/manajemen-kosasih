@@ -11,6 +11,7 @@ use Session;
 use App\Kategori;
 use App\Tugas;
 use App\User;
+use App\Lokasi;
 use File;
 use App\KomentarController;
 
@@ -28,7 +29,7 @@ class TugasController extends Controller
     if ($request->ajax()) {
 
 
-      $tugas = Tugas::with(['kategori','petugas','menugaskan']);
+      $tugas = Tugas::with(['kategori','petugas','menugaskan','lokasi']);
 
 
             return Datatables::of($tugas)->addColumn('action', function($tugas){
@@ -69,6 +70,7 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'menugaskan.name', 'name'=>'menugaskan.name', 'title'=>'Pemberi Tugas', 'searchable'=>false])
 ->addColumn(['data' => 'deadline', 'name'=>'deadline', 'title'=>'Deadline'])
 ->addColumn(['data' => 'kategori.nama', 'name'=>'kategori.nama', 'title'=>'Kategori'])
+->addColumn(['data' => 'lokasi.lokasi', 'name'=>'lokasi.lokasi', 'title'=>'Lokasi'])
 ->addColumn(['data' => 'status_tugas', 'name'=>'status_tugas', 'title'=>'Status'])
 ->addColumn(['data' => 'created_at', 'name'=>'created_at', 'title'=>'Created At'])
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]);
@@ -76,8 +78,9 @@ $html = $htmlBuilder
  $kategori = Kategori::all();
  $petugas = User::all();
  $menugaskan = User::all();
+ $lokasi = Lokasi::all();
 
-return view('tugas.index',['kategori' => $kategori,'petugas' => $petugas,'menugaskan' => $menugaskan])->with(compact('html'));
+return view('tugas.index',['kategori' => $kategori,'petugas' => $petugas,'menugaskan' => $menugaskan,'lokasi' => $lokasi])->with(compact('html'));
 }
 
 public function status_tugas(Request $request, Builder $htmlBuilder,$id)
@@ -85,7 +88,7 @@ public function status_tugas(Request $request, Builder $htmlBuilder,$id)
     if ($request->ajax()) {
 
 
-      $tugas = Tugas::with(['kategori','petugas','menugaskan'])->where('status_tugas',$id);
+      $tugas = Tugas::with(['kategori','petugas','menugaskan','lokasi'])->where('status_tugas',$id);
 
 
             return Datatables::of($tugas)->addColumn('action', function($tugas){
@@ -125,6 +128,7 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'menugaskan.name', 'name'=>'menugaskan.name', 'title'=>'Menugaskan'])
 ->addColumn(['data' => 'deadline', 'name'=>'deadline', 'title'=>'Deadline'])
 ->addColumn(['data' => 'kategori.nama', 'name'=>'kategori.nama', 'title'=>'Kategori'])
+->addColumn(['data' => 'lokasi.lokasi', 'name'=>'lokasi.lokasi', 'title'=>'Lokasi'])
 ->addColumn(['data' => 'status_tugas', 'name'=>'status_tugas', 'title'=>'Status'])
 ->addColumn(['data' => 'created_at', 'name'=>'created_at', 'title'=>'Created At'])
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]);
@@ -132,8 +136,9 @@ $html = $htmlBuilder
  $kategori = Kategori::all();
  $petugas = User::all();
  $menugaskan = User::all();
+ $lokasi = Lokasi::all();
 
-return view('tugas.index',['kategori' => $kategori,'petugas' => $petugas,'menugaskan' => $menugaskan])->with(compact('html'));
+return view('tugas.index',['kategori' => $kategori,'petugas' => $petugas,'menugaskan' => $menugaskan,'lokasi' => $lokasi])->with(compact('html'));
 }
 
 public function petugas_tugas(Request $request, Builder $htmlBuilder,$id)
@@ -141,7 +146,7 @@ public function petugas_tugas(Request $request, Builder $htmlBuilder,$id)
     if ($request->ajax()) {
 
 
-      $tugas = Tugas::with(['kategori','petugas','menugaskan'])->where('petugas',$id);
+      $tugas = Tugas::with(['kategori','petugas','menugaskan','lokasi'])->where('petugas',$id);
 
 
             return Datatables::of($tugas)->addColumn('action', function($tugas){
@@ -181,14 +186,16 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'menugaskan.name', 'name'=>'menugaskan.name', 'title'=>'Menugaskan'])
 ->addColumn(['data' => 'deadline', 'name'=>'deadline', 'title'=>'Deadline'])
 ->addColumn(['data' => 'kategori.nama', 'name'=>'kategori.nama', 'title'=>'Kategori'])
+->addColumn(['data' => 'lokasi.lokasi', 'name'=>'lokasi.lokasi', 'title'=>'Lokasi'])
 ->addColumn(['data' => 'status_tugas', 'name'=>'status_tugas', 'title'=>'Status'])
 ->addColumn(['data' => 'created_at', 'name'=>'created_at', 'title'=>'Created At'])
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]);
  $kategori = Kategori::all();
  $petugas = User::all();
  $menugaskan = User::all();
+ $lokasi = Lokasi::all();
 
-return view('tugas.index',['kategori' => $kategori,'petugas' => $petugas,'menugaskan' => $menugaskan])->with(compact('html'));
+return view('tugas.index',['kategori' => $kategori,'petugas' => $petugas,'menugaskan' => $menugaskan,'lokasi' => $lokasi])->with(compact('html'));
 }
 
 public function menugaskan_tugas(Request $request, Builder $htmlBuilder,$id)
@@ -196,7 +203,7 @@ public function menugaskan_tugas(Request $request, Builder $htmlBuilder,$id)
     if ($request->ajax()) {
 
 
-      $tugas = Tugas::with(['kategori','petugas','menugaskan'])->where('menugaskan',$id);
+      $tugas = Tugas::with(['kategori','petugas','menugaskan','lokasi'])->where('menugaskan',$id);
 
 
             return Datatables::of($tugas)->addColumn('action', function($tugas){
@@ -236,14 +243,16 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'menugaskan.name', 'name'=>'menugaskan.name', 'title'=>'Menugaskan'])
 ->addColumn(['data' => 'deadline', 'name'=>'deadline', 'title'=>'Deadline'])
 ->addColumn(['data' => 'kategori.nama', 'name'=>'kategori.nama', 'title'=>'Kategori'])
+->addColumn(['data' => 'lokasi.lokasi', 'name'=>'lokasi.lokasi', 'title'=>'Lokasi'])
 ->addColumn(['data' => 'status_tugas', 'name'=>'status_tugas', 'title'=>'Status'])
 ->addColumn(['data' => 'created_at', 'name'=>'created_at', 'title'=>'Created At'])
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]);
  $kategori = Kategori::all();
  $petugas = User::all();
  $menugaskan = User::all();
+ $lokasi = Lokasi::all();
 
-return view('tugas.index',['kategori' => $kategori,'petugas' => $petugas,'menugaskan' => $menugaskan])->with(compact('html'));
+return view('tugas.index',['kategori' => $kategori,'petugas' => $petugas,'menugaskan' => $menugaskan,'lokasi' => $lokasi])->with(compact('html'));
 }
 
 public function kategori_tugas(Request $request, Builder $htmlBuilder,$id)
@@ -251,7 +260,7 @@ public function kategori_tugas(Request $request, Builder $htmlBuilder,$id)
     if ($request->ajax()) {
 
 
-      $tugas = Tugas::with(['kategori','petugas','menugaskan'])->where('kategori_id',$id);
+      $tugas = Tugas::with(['kategori','petugas','menugaskan','lokasi'])->where('kategori_id',$id);
 
 
             return Datatables::of($tugas)->addColumn('action', function($tugas){
@@ -291,14 +300,73 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'menugaskan.name', 'name'=>'menugaskan.name', 'title'=>'Menugaskan'])
 ->addColumn(['data' => 'deadline', 'name'=>'deadline', 'title'=>'Deadline'])
 ->addColumn(['data' => 'kategori.nama', 'name'=>'kategori.nama', 'title'=>'Kategori'])
+->addColumn(['data' => 'lokasi.lokasi', 'name'=>'lokasi.lokasi', 'title'=>'Lokasi'])
 ->addColumn(['data' => 'status_tugas', 'name'=>'status_tugas', 'title'=>'Status'])
 ->addColumn(['data' => 'created_at', 'name'=>'created_at', 'title'=>'Created At'])
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]);
  $kategori = Kategori::all();
  $petugas = User::all();
  $menugaskan = User::all();
+ $lokasi = Lokasi::all();
 
-return view('tugas.index',['kategori' => $kategori,'petugas' => $petugas,'menugaskan' => $menugaskan])->with(compact('html'));
+return view('tugas.index',['kategori' => $kategori,'petugas' => $petugas,'menugaskan' => $menugaskan,'lokasi' => $lokasi])->with(compact('html'));
+}
+
+public function lokasi_tugas(Request $request, Builder $htmlBuilder,$id)
+{
+    if ($request->ajax()) {
+
+
+      $tugas = Tugas::with(['kategori','petugas','menugaskan','lokasi'])->where('lokasi_id',$id);
+
+
+            return Datatables::of($tugas)->addColumn('action', function($tugas){
+                 $id_user = Auth::user()->id;
+            return view('tugas._action', 
+            [
+             'detail_url' => route('tugas.show', $tugas->id),
+            'edit_url' => route('tugas.edit', $tugas->id),
+             'kerjakan_url' => route('tugas.dikerjakan',$tugas->id),
+             'konfirmasi_url' => route('tugas.konfirmasi',$tugas->id),
+             'selesai_url' => route('tugas.selesai',$tugas->id),
+             'belum_url' => route('tugas.belum',$tugas->id),
+            'hapus_url' => route('tugas.destroy',$tugas->id),
+            'model' => $tugas,
+            'id_user' => $id_user,
+            ]);
+            })->addColumn('status_tugas', function($tugas){
+        if($tugas->status_tugas == 0) {
+          $status_tugas = "Belum dikerjakan";
+        }
+        elseif($tugas->status_tugas == 1){
+   $status_tugas = "Sedang dikerjakan";
+        }
+         elseif($tugas->status_tugas == 2){
+   $status_tugas = "Sudah Selesai Oleh Petugas";
+        }
+         elseif($tugas->status_tugas == 3){
+   $status_tugas = "Sudah Dikonfirmasi Oleh Pengecek";
+        }
+
+        return $status_tugas;
+            })->make(true);
+    }
+$html = $htmlBuilder
+->addColumn(['data' => 'judul', 'name'=>'judul', 'title'=>'Judul Tugas'])
+->addColumn(['data' => 'petugas.name', 'name'=>'petugas.name', 'title'=>'Petugas'])
+->addColumn(['data' => 'menugaskan.name', 'name'=>'menugaskan.name', 'title'=>'Menugaskan'])
+->addColumn(['data' => 'deadline', 'name'=>'deadline', 'title'=>'Deadline'])
+->addColumn(['data' => 'kategori.nama', 'name'=>'kategori.nama', 'title'=>'Kategori'])
+->addColumn(['data' => 'lokasi.lokasi', 'name'=>'lokasi.lokasi', 'title'=>'Lokasi'])
+->addColumn(['data' => 'status_tugas', 'name'=>'status_tugas', 'title'=>'Status'])
+->addColumn(['data' => 'created_at', 'name'=>'created_at', 'title'=>'Created At'])
+->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]);
+ $kategori = Kategori::all();
+ $petugas = User::all();
+ $menugaskan = User::all();
+ $lokasi = Lokasi::all();
+
+return view('tugas.index',['kategori' => $kategori,'petugas' => $petugas,'menugaskan' => $menugaskan,'lokasi' => $lokasi])->with(compact('html'));
 }
     /**
      * Show the form for creating a new resource.
@@ -311,10 +379,10 @@ return view('tugas.index',['kategori' => $kategori,'petugas' => $petugas,'menuga
 
 
  $kategori = Kategori::all()->pluck('nama', 'id');
-
  $petugas = User::all()->pluck('name', 'id');
+ $lokasi = Lokasi::all()->pluck('lokasi', 'id');
 
- return view('tugas.create',['kategori' => $kategori,'petugas' => $petugas]);
+ return view('tugas.create',['kategori' => $kategori,'petugas' => $petugas,'lokasi' => $lokasi]);
 
 
     }
@@ -335,13 +403,14 @@ return view('tugas.index',['kategori' => $kategori,'petugas' => $petugas,'menuga
         'petugas' => 'required',
         'deadline' => 'required:date',
         'kategori_id' => 'required',
+        'lokasi_id' => 'required',
         'foto' => 'mimes:jpeg,jpg,png,gif|max:2048'
         ]);
 
     $id_user = Auth::user()->id;
     $nama_user = Auth::user()->name;
 
-        $tugas =  Tugas::create(['judul' => $request->judul,'deskripsi' => $request->deskripsi,'petugas' => $request->petugas,'menugaskan' =>   $id_user,'deadline' => date('Y-m-d',strtotime($request->deadline)),'kategori_id' => $request->kategori_id]);
+        $tugas =  Tugas::create(['judul' => $request->judul,'deskripsi' => $request->deskripsi,'petugas' => $request->petugas,'menugaskan' =>   $id_user,'deadline' => date('Y-m-d',strtotime($request->deadline)),'kategori_id' => $request->kategori_id,'lokasi_id'=> $request->lokasi_id]);
 
         $petugas = User::find($request->petugas);
 
@@ -418,11 +487,11 @@ return view('tugas.index',['kategori' => $kategori,'petugas' => $petugas,'menuga
 
 
  $kategori = Kategori::all()->pluck('nama', 'id');
-
  $petugas = User::all()->pluck('name', 'id');
+ $lokasi = Lokasi::all()->pluck('lokasi', 'id');
  $tugas = Tugas::find($id);
 
- return view('tugas.edit',['kategori' => $kategori,'petugas' => $petugas,'tugas'=> $tugas]);
+ return view('tugas.edit',['kategori' => $kategori,'petugas' => $petugas,'tugas'=> $tugas,'lokasi'=>$lokasi]);
 
 
     }
@@ -444,12 +513,13 @@ return view('tugas.index',['kategori' => $kategori,'petugas' => $petugas,'menuga
         'petugas' => 'required',
         'deadline' => 'required',
         'kategori_id' => 'required',
+        'lokasi_id' => 'required',
         'foto' => 'image'
         ]);
 
     $id_user = Auth::user()->id;
 
-         $tugas = Tugas::find($id)->update(['judul' => $request->judul,'deskripsi' => $request->deskripsi,'petugas' => $request->petugas,'menugaskan' =>   $id_user,'deadline' => date('Y-m-d',strtotime($request->deadline)),'kategori_id' => $request->kategori_id]);
+         $tugas = Tugas::find($id)->update(['judul' => $request->judul,'deskripsi' => $request->deskripsi,'petugas' => $request->petugas,'menugaskan' =>   $id_user,'deadline' => date('Y-m-d',strtotime($request->deadline)),'kategori_id' => $request->kategori_id,'lokasi_id'=>$request->lokasi_id]);
 $tugas = Tugas::find($id);
           if ($request->hasFile('foto')) {
         // Mengambil file yang diupload

@@ -24,7 +24,10 @@ Route::group(['prefix'=>'tracking', 'middleware'=>['auth']], function () {
 
 	Route::resource('kategori', 'KategoriController');
 
+	Route::resource('lokasi', 'LokasiController');
+
 	Route::resource('tugas', 'TugasController');
+
 	Route::post('/komentar',[
 'middleware' => ['auth'],
 'as' => 'tugas.komentar',
@@ -37,6 +40,11 @@ Route::group(['prefix'=>'tracking', 'middleware'=>['auth']], function () {
 'uses' => 'TugasController@sedang_dikerjakan'
 ] );
 
+		Route::get('/lokasi-tugas/{id}',[
+'middleware' => ['auth'],
+'as' => 'tugas.lokasi',
+'uses' => 'TugasController@lokasi_tugas'
+] );
 
 		Route::get('/status-tugas/{id}',[
 'middleware' => ['auth'],
@@ -49,42 +57,44 @@ Route::group(['prefix'=>'tracking', 'middleware'=>['auth']], function () {
 'as' => 'tugas.petugas',
 'uses' => 'TugasController@petugas_tugas'
 ] );
+
 		Route::get('/menugaskan-tugas/{id}',[
 'middleware' => ['auth'],
 'as' => 'tugas.menugaskan',
 'uses' => 'TugasController@menugaskan_tugas'
 ] );
+
 		Route::get('/kategori-tugas/{id}',[
 'middleware' => ['auth'],
 'as' => 'tugas.kategori',
 'uses' => 'TugasController@kategori_tugas'
 ] );
 
-			Route::get('/selesai-dikerjakan/{id}',[
+		Route::get('/selesai-dikerjakan/{id}',[
 'middleware' => ['auth'],
 'as' => 'tugas.selesai',
 'uses' => 'TugasController@selesai_dikerjakan'
 ] );
 
-			Route::get('/konfirmasi-dikerjakan/{id}',[
+		Route::get('/konfirmasi-dikerjakan/{id}',[
 'middleware' => ['auth'],
 'as' => 'tugas.konfirmasi',
 'uses' => 'TugasController@konfirmasi_kerjaan'
 ] );
 
-			Route::get('/belum-selesai/{id}',[
+		Route::get('/belum-selesai/{id}',[
 'middleware' => ['auth'],
 'as' => 'tugas.belum',
 'uses' => 'TugasController@belum_selesai'
 ] );
 
-			Route::put('/belum-selesai{id}',[
+		Route::put('/belum-selesai{id}',[
 'middleware' => ['auth'],
 'as' => 'tugas.belum-update',
 'uses' => 'TugasController@belum_selesai_update'
 ] );
 
-						Route::put('/sudah-selesai{id}',[
+		Route::put('/sudah-selesai{id}',[
 'middleware' => ['auth'],
 'as' => 'tugas.selesai-update',
 'uses' => 'TugasController@selesai_update'
