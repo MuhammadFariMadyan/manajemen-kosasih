@@ -68,7 +68,7 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'petugas.name', 'name'=>'petugas.name', 'title'=>'Petugas', 'searchable'=>false])
 ->addColumn(['data' => 'menugaskan.name', 'name'=>'menugaskan.name', 'title'=>'Pemberi Tugas', 'searchable'=>false])
 ->addColumn(['data' => 'deadline', 'name'=>'deadline', 'title'=>'Deadline'])
-
+->addColumn(['data' => 'kategori.nama', 'name'=>'kategori.nama', 'title'=>'Kategori'])
 ->addColumn(['data' => 'status_tugas', 'name'=>'status_tugas', 'title'=>'Status'])
 ->addColumn(['data' => 'created_at', 'name'=>'created_at', 'title'=>'Created At'])
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]);
@@ -124,6 +124,7 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'petugas.name', 'name'=>'petugas.name', 'title'=>'Petugas'])
 ->addColumn(['data' => 'menugaskan.name', 'name'=>'menugaskan.name', 'title'=>'Menugaskan'])
 ->addColumn(['data' => 'deadline', 'name'=>'deadline', 'title'=>'Deadline'])
+->addColumn(['data' => 'kategori.nama', 'name'=>'kategori.nama', 'title'=>'Kategori'])
 ->addColumn(['data' => 'status_tugas', 'name'=>'status_tugas', 'title'=>'Status'])
 ->addColumn(['data' => 'created_at', 'name'=>'created_at', 'title'=>'Created At'])
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]);
@@ -179,6 +180,7 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'petugas.name', 'name'=>'petugas.name', 'title'=>'Petugas'])
 ->addColumn(['data' => 'menugaskan.name', 'name'=>'menugaskan.name', 'title'=>'Menugaskan'])
 ->addColumn(['data' => 'deadline', 'name'=>'deadline', 'title'=>'Deadline'])
+->addColumn(['data' => 'kategori.nama', 'name'=>'kategori.nama', 'title'=>'Kategori'])
 ->addColumn(['data' => 'status_tugas', 'name'=>'status_tugas', 'title'=>'Status'])
 ->addColumn(['data' => 'created_at', 'name'=>'created_at', 'title'=>'Created At'])
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]);
@@ -233,6 +235,7 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'petugas.name', 'name'=>'petugas.name', 'title'=>'Petugas'])
 ->addColumn(['data' => 'menugaskan.name', 'name'=>'menugaskan.name', 'title'=>'Menugaskan'])
 ->addColumn(['data' => 'deadline', 'name'=>'deadline', 'title'=>'Deadline'])
+->addColumn(['data' => 'kategori.nama', 'name'=>'kategori.nama', 'title'=>'Kategori'])
 ->addColumn(['data' => 'status_tugas', 'name'=>'status_tugas', 'title'=>'Status'])
 ->addColumn(['data' => 'created_at', 'name'=>'created_at', 'title'=>'Created At'])
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]);
@@ -287,6 +290,7 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'petugas.name', 'name'=>'petugas.name', 'title'=>'Petugas'])
 ->addColumn(['data' => 'menugaskan.name', 'name'=>'menugaskan.name', 'title'=>'Menugaskan'])
 ->addColumn(['data' => 'deadline', 'name'=>'deadline', 'title'=>'Deadline'])
+->addColumn(['data' => 'kategori.nama', 'name'=>'kategori.nama', 'title'=>'Kategori'])
 ->addColumn(['data' => 'status_tugas', 'name'=>'status_tugas', 'title'=>'Status'])
 ->addColumn(['data' => 'created_at', 'name'=>'created_at', 'title'=>'Created At'])
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]);
@@ -304,6 +308,7 @@ return view('tugas.index',['kategori' => $kategori,'petugas' => $petugas,'menuga
     public function create()
     {
         //
+
 
  $kategori = Kategori::all()->pluck('nama', 'id');
 

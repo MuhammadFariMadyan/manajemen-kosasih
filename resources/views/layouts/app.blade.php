@@ -52,21 +52,6 @@
                        @if (Auth::check())
                     <li><a href="{{ url('/home') }}">Dashboard</a></li>
                      <li><a href="{{route('tugas.index')}}">Tugas</a></li>
-
-                     <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    Status Tugas <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                           <a href="{{ url('/tracking/status-tugas/0') }}">Tugas Belum Dikerjakan / Bermasalah</a>
-                                        <a href="{{ url('/tracking/status-tugas/1') }}">Tugas Sedang Dikerjakan</a>
-                                        <a href="{{ url('/tracking/status-tugas/2') }}">Tugas Sudah Selesai Dikerjakan</a>
-                                        <a href="{{ url('/tracking/status-tugas/3') }}">Tugas Sudah Dikonfirmasi</a>
-                                    </li>
-                                </ul>
-                            </li>
                     <li><a href="{{ route('kategori.index') }}">Kategori</a></li>
                     @endif
 

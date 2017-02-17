@@ -38,6 +38,21 @@
   </ul>
 </div>
 
+
+<div class="btn-group">
+  <button type="button" class="btn btn-primary">Status Tugas & Request</button>
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="{{ url('/tracking/tugas') }}">All</a></li>
+    <li><a href="{{ route('tugas.status',0) }}">Tugas Belum Dikerjakan / Bermasalah</a></li>
+    <li><a href="{{ route('tugas.status',1) }}">Tugas Sedang Dikerjakan</a></li>
+      <li><a href="{{ route('tugas.status',2) }}">Tugas Sudah Selesai Dikerjakan</a></li>
+     <li><a href="{{ route('tugas.status',3) }}">Tugas Sudah Dikonfirmasi</a></li>
+  </ul>
+</div>
+
 <div class="btn-group">
   <button type="button" class="btn btn-primary">Kategori</button>
   <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
