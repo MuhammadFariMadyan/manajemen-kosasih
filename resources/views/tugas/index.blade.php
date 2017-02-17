@@ -12,8 +12,43 @@
 <h2 class="panel-title">Tugas</h2>
 </div>
 <div class="panel-body">
-<p> <a class="btn btn-primary" href="{{ route('tugas.create') }}">Tambah</a> </p>
+ <a class="btn btn-primary" href="{{ route('tugas.create') }}">Tambah</a>  
 
+<div class="btn-group">
+  <button type="button" class="btn btn-primary">Petugas</button>
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">  
+  @foreach($petugas as $petugass)
+    <li><a href="{{ route('tugas.petugas',$petugass->id) }}">{{ $petugass->name }}</a></li>
+@endforeach
+  </ul>
+</div>
+
+<div class="btn-group">
+  <button type="button" class="btn btn-primary">Pemberi Tugas</button>
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">  
+  @foreach($menugaskan as $menugaskans)
+    <li><a href="{{ route('tugas.menugaskan',$menugaskans->id) }}">{{ $menugaskans->name }}</a></li>
+@endforeach
+  </ul>
+</div>
+
+<div class="btn-group">
+  <button type="button" class="btn btn-primary">Kategori</button>
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">  
+  @foreach($kategori as $kategoris)
+    <li><a href="{{ route('tugas.kategori',$kategoris->id) }}">{{ $kategoris->nama }}</a></li>
+@endforeach
+  </ul>
+</div> 
 <div class="table-responsive">
 {!! $html->table(['class'=>'table-striped table']) !!}
 

@@ -44,6 +44,21 @@ Route::group(['prefix'=>'tracking', 'middleware'=>['auth']], function () {
 'uses' => 'TugasController@status_tugas'
 ] );
 
+		Route::get('/petugas-tugas/{id}',[
+'middleware' => ['auth'],
+'as' => 'tugas.petugas',
+'uses' => 'TugasController@petugas_tugas'
+] );
+		Route::get('/menugaskan-tugas/{id}',[
+'middleware' => ['auth'],
+'as' => 'tugas.menugaskan',
+'uses' => 'TugasController@menugaskan_tugas'
+] );
+		Route::get('/kategori-tugas/{id}',[
+'middleware' => ['auth'],
+'as' => 'tugas.kategori',
+'uses' => 'TugasController@kategori_tugas'
+] );
 
 			Route::get('/selesai-dikerjakan/{id}',[
 'middleware' => ['auth'],
