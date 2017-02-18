@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Users;
+use App\Otoritas;
 use Yajra\Datatables\Html\Builder;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Session;
@@ -29,18 +30,28 @@ class UserController extends Controller
             'edit_url' => route('user.edit', $user->id),
         
             'hapus_url' => route('user.destroy',$user->id),
-             'confirm_message'   => 'Yakin mau menghapus user ' . $user->name . '?',
+             'confirm_message'   => 'Yakin mau menghapus User ' . $user->name . '?',
             'model' => $user,
             ]);
-             })->addColumn('jabatan', function($tugas){
-        if($tugas->jabatan == 0) {
+             })->addColumn('jabatan', function($user){
+        if($user->jabatan == 0) {
           $jabatan = "Member";
         }
-        elseif($tugas->jabatan == 1){
+        elseif($user->jabatan == 1){
    $jabatan = "Admin";
         }
 
         return $jabatan;
+             })->addColumn('otoritas', function($user){
+        if($user->otoritas == 0) {
+          $otoritas = "Tidak Ada Otoritas";
+        }
+        elseif($user->otoritas !=0){
+            $nama_otoritas = Otoritas::find($user->otoritas)->select('otoritas')->first();
+   $otoritas = $nama_otoritas->otoritas;
+        }
+
+        return $otoritas;
             })->make(true);
     }
 
@@ -63,8 +74,7 @@ return view('user.index')->with(compact('html'));
      */
     public function create()
     {
-        //
-        return view('user.create');
+        // 
     }
 
     /**
@@ -75,27 +85,7 @@ return view('user.index')->with(compact('html'));
      */
     public function store(Request $request)
     {
-        //
-         $this->validate($request, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6',
-            'jabatan' => 'required',
-            'otoritas' => ''
-        ]);
-
-         Users::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'jabatan' => $request->jabatan,
-            'otoritas' => $request->otoritas]);
-
-          Session::flash("flash_notification", [
-    "level"=>"success",
-    "message"=>"Berhasil menyimpan Otoritas $request->name "
-    ]);
-         return redirect('/tracking/user');
+        // 
     }
 
     /**
@@ -134,23 +124,21 @@ return view('user.index')->with(compact('html'));
         //
          $this->validate($request, [
             'name' => 'required|max:255',
-            'email' => 'required|unique:users,email,'. $id ,
-            'password' => 'required|min:6',
+            'email' => 'required|unique:users,email,'. $id , 
             'jabatan' => 'required',
-            'otoritas' => ''  
+            'otoritas' => 'required'  
         ]);
 
  
          $user = Users::find($id)->update([
             'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'email' => $request->email, 
             'jabatan' => $request->jabatan,
             'otoritas' => $request->otoritas]);
 
         Session::flash("flash_notification", [
             "level"=>"success",
-            "message"=>"berhasil menyimpan $request->name"
+            "message"=>"berhasil Memngubah User $request->name"
             ]);
         return redirect()->route('user.index');
     }
@@ -171,7 +159,7 @@ return view('user.index')->with(compact('html'));
         else{
         Session:: flash("flash_notification", [
             "level"=>"success",
-            "message"=>"Member berhasil dihapus"
+            "message"=>"User berhasil dihapus"
             ]);
         return redirect()->route('user.index');
             }

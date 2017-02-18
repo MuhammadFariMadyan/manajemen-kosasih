@@ -11,8 +11,7 @@
 <div class="panel-heading">
 <h2 class="panel-title">User</h2>
 </div>
-<div class="panel-body">
-<p> <a class="btn btn-primary" href="{{ route('user.create') }}">Tambah</a> </p>
+<div class="panel-body"> 
 
 <div class="table-responsive">
 {!! $html->table(['class'=>'table-striped table']) !!}
