@@ -30,6 +30,8 @@ Route::group(['prefix'=>'tracking', 'middleware'=>['auth']], function () {
 
 	Route::resource('tugas', 'TugasController');
 
+	Route::resource('user', 'UserController');
+
 	Route::post('/komentar',[
 'middleware' => ['auth'],
 'as' => 'tugas.komentar',

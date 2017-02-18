@@ -54,9 +54,12 @@
                      <li><a href="{{route('tugas.index')}}">Tugas</a></li>
                     <li><a href="{{ route('kategori.index') }}">Kategori</a></li>
                     <li><a href="{{ route('lokasi.index') }}">Lokasi</a></li>
-                    <li><a href="{{ route('otoritas.index') }}">Otoritas</a></li>
-                    @endif
 
+                    @if(Auth::user()->jabatan == '1')
+                    <li><a href="{{ route('otoritas.index') }}">Otoritas</a></li>
+                    <li><a href="{{ route('user.index') }}">User</a></li>
+                    @endif
+                    @endif 
                     </ul>
 
                     <!-- Right Side Of Navbar -->
