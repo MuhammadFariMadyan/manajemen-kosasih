@@ -125,7 +125,7 @@ public function status_tugas(Request $request, Builder $htmlBuilder,$id)
 $html = $htmlBuilder
 ->addColumn(['data' => 'judul', 'name'=>'judul', 'title'=>'Judul Tugas'])
 ->addColumn(['data' => 'petugas.name', 'name'=>'petugas.name', 'title'=>'Petugas'])
-->addColumn(['data' => 'menugaskan.name', 'name'=>'menugaskan.name', 'title'=>'Menugaskan'])
+->addColumn(['data' => 'menugaskan.name', 'name'=>'menugaskan.name', 'title'=>'Pemberi Tugas'])
 ->addColumn(['data' => 'deadline', 'name'=>'deadline', 'title'=>'Deadline'])
 ->addColumn(['data' => 'kategori.nama', 'name'=>'kategori.nama', 'title'=>'Kategori'])
 ->addColumn(['data' => 'lokasi.lokasi', 'name'=>'lokasi.lokasi', 'title'=>'Lokasi'])
@@ -183,7 +183,7 @@ public function petugas_tugas(Request $request, Builder $htmlBuilder,$id)
 $html = $htmlBuilder
 ->addColumn(['data' => 'judul', 'name'=>'judul', 'title'=>'Judul Tugas'])
 ->addColumn(['data' => 'petugas.name', 'name'=>'petugas.name', 'title'=>'Petugas'])
-->addColumn(['data' => 'menugaskan.name', 'name'=>'menugaskan.name', 'title'=>'Menugaskan'])
+->addColumn(['data' => 'menugaskan.name', 'name'=>'menugaskan.name', 'title'=>'Pemberi Tugas'])
 ->addColumn(['data' => 'deadline', 'name'=>'deadline', 'title'=>'Deadline'])
 ->addColumn(['data' => 'kategori.nama', 'name'=>'kategori.nama', 'title'=>'Kategori'])
 ->addColumn(['data' => 'lokasi.lokasi', 'name'=>'lokasi.lokasi', 'title'=>'Lokasi'])
@@ -240,7 +240,7 @@ public function menugaskan_tugas(Request $request, Builder $htmlBuilder,$id)
 $html = $htmlBuilder
 ->addColumn(['data' => 'judul', 'name'=>'judul', 'title'=>'Judul Tugas'])
 ->addColumn(['data' => 'petugas.name', 'name'=>'petugas.name', 'title'=>'Petugas'])
-->addColumn(['data' => 'menugaskan.name', 'name'=>'menugaskan.name', 'title'=>'Menugaskan'])
+->addColumn(['data' => 'menugaskan.name', 'name'=>'menugaskan.name', 'title'=>'Pemberi Tugas'])
 ->addColumn(['data' => 'deadline', 'name'=>'deadline', 'title'=>'Deadline'])
 ->addColumn(['data' => 'kategori.nama', 'name'=>'kategori.nama', 'title'=>'Kategori'])
 ->addColumn(['data' => 'lokasi.lokasi', 'name'=>'lokasi.lokasi', 'title'=>'Lokasi'])
@@ -297,7 +297,7 @@ public function kategori_tugas(Request $request, Builder $htmlBuilder,$id)
 $html = $htmlBuilder
 ->addColumn(['data' => 'judul', 'name'=>'judul', 'title'=>'Judul Tugas'])
 ->addColumn(['data' => 'petugas.name', 'name'=>'petugas.name', 'title'=>'Petugas'])
-->addColumn(['data' => 'menugaskan.name', 'name'=>'menugaskan.name', 'title'=>'Menugaskan'])
+->addColumn(['data' => 'menugaskan.name', 'name'=>'menugaskan.name', 'title'=>'Pemberi Tugas'])
 ->addColumn(['data' => 'deadline', 'name'=>'deadline', 'title'=>'Deadline'])
 ->addColumn(['data' => 'kategori.nama', 'name'=>'kategori.nama', 'title'=>'Kategori'])
 ->addColumn(['data' => 'lokasi.lokasi', 'name'=>'lokasi.lokasi', 'title'=>'Lokasi'])
@@ -354,7 +354,7 @@ public function lokasi_tugas(Request $request, Builder $htmlBuilder,$id)
 $html = $htmlBuilder
 ->addColumn(['data' => 'judul', 'name'=>'judul', 'title'=>'Judul Tugas'])
 ->addColumn(['data' => 'petugas.name', 'name'=>'petugas.name', 'title'=>'Petugas'])
-->addColumn(['data' => 'menugaskan.name', 'name'=>'menugaskan.name', 'title'=>'Menugaskan'])
+->addColumn(['data' => 'menugaskan.name', 'name'=>'menugaskan.name', 'title'=>'Pemberi Tugas'])
 ->addColumn(['data' => 'deadline', 'name'=>'deadline', 'title'=>'Deadline'])
 ->addColumn(['data' => 'kategori.nama', 'name'=>'kategori.nama', 'title'=>'Kategori'])
 ->addColumn(['data' => 'lokasi.lokasi', 'name'=>'lokasi.lokasi', 'title'=>'Lokasi'])
@@ -418,7 +418,7 @@ return view('tugas.index',['kategori' => $kategori,'petugas' => $petugas,'menuga
 
           $response = Telegram::sendMessage([
       'chat_id' =>    $chat_id, 
-      'text' => "$nama_user Menugaskan $petugas->name \n Judul : $request->judul \n Deskripsi : $request->judul  \n Deadline : $request->deadline "
+      'text' => "$nama_user \n Pemberi Tugas $petugas->name \n Judul : $request->judul \n Deskripsi : $request->judul  \n Deadline : $request->deadline "
     ]);
 
          // isi field cover jika ada cover yang diupload
