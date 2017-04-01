@@ -418,7 +418,7 @@ return view('tugas.index',['kategori' => $kategori,'petugas' => $petugas,'menuga
 
           $response = Telegram::sendMessage([
       'chat_id' =>    $chat_id, 
-      'text' => "$nama_user \n Pemberi Tugas $petugas->name \n Judul : $request->judul \n Deskripsi : $request->judul  \n Deadline : $request->deadline "
+      'text' => "$nama_user \n Pemberi Tugas $petugas->name \n Judul : $request->judul \n Deskripsi : $request->deskripsi  \n Deadline : $request->deadline "
     ]);
 
          // isi field cover jika ada cover yang diupload
@@ -581,7 +581,7 @@ $tugas = Tugas::find($id);
 
           $response = Telegram::sendMessage([
       'chat_id' =>    $chat_id, 
-      'text' => "$nama_user Menghapus Tugas yang di berikan kepada $petugas->name \n Judul : $tugas->judul \n Deskripsi : $tugas->judul  \n Deadline : $tugas->deadline "
+      'text' => "$nama_user Menghapus Tugas yang di berikan kepada $petugas->name \n Judul : $tugas->judul \n Deskripsi : $tugas->deskripsi  \n Deadline : $tugas->deadline "
     ]);
 
 
